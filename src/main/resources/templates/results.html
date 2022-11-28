@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kam dnes na obed?</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" type="text/css"
+	href="/css/jquery.mobile-1.4.5.min.css" />
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<!-- <script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script> -->
+<script th:src="@{/webjars/jquery-mobile/jquery.mobile.min.js}"></script>
+<!-- <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script> -->
+
+<link rel="stylesheet" type="text/css" href="/css/lunch20192511.css" />
+
+</head>
+<body onpageshow="refreshAjax()">
+
+	<script type="text/javascript" src="/scripts/lunch20192911.js"></script>
+
+	<div data-role="page" id="page1">
+		<div role="main" class="ui-content">
+		
+			<!-- tabulka a vysledek -->
+			<div th:replace="fragments::ajax_results"/>
+		</div>
+
+		<!--  CHAT -->
+		<div th:replace="fragments::ajax_chat"/>
+
+		<!-- DILBERT -->
+		<div id="dilbert" class="ui-grid-solo">
+			<div th:each="url,iter : ${DILBERT_URL}">
+				<a th:href="${url}"><img th:src="${DILBERT_IMG.get(iter.index)}"
+					style="max-width: 90%; max-height: 90%; height: auto;"></img></a>
+					<img src="/images/delete.png" class="edit-icon"
+					th:if="${iter.index == 0}" onclick="hideDilbert();" onmouseover=""
+					style="vertical-align: top; cursor: pointer;"/>
+			</div>
+		</div>
+
+		<div th:replace="fragments::food(${HOSPODYL}, null, false)" />
+
+		<div th:replace="fragments::food(${HOSPODYR}, null, false)" />
+
+
+	</div>	
+</body>
+</html>
+

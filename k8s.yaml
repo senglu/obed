@@ -1,0 +1,97 @@
+# apiVersion: route.openshift.io/v1
+# kind: Route
+# metadata:
+#   name: kam-dnes-na-obed
+#   annotations:
+#     haproxy.router.openshift.io/balance: roundrobin
+#     haproxy.router.openshift.io/timeout: 60s
+#     haproxy.router.openshift.io/hsts_header: max-age=31536000;includeSubDomains;preload
+#   label:
+#     apmservices: core
+# spec:
+#   host: kam-dnes-na-obed.okd.asmdev.ca.com
+#   path: /
+#   port:
+#     targetPort: 5000
+#   tls:
+#     termination: edge
+#   to:
+#     kind: Service
+#     name: kam-dnes-na-obed
+#     weight: 100
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kam-dnes-na-obed
+  annotations:
+    nginx.ingress.kubernetes.io/load-balance:             "round_robin"
+    nginx.ingress.kubernetes.io/proxy-body-size:          "6m"
+    nginx.ingress.kubernetes.io/affinity:                 "cookie"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout:    "60"
+    nginx.ingress.kubernetes.io/proxy-read-timeout:       "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout:       "600"
+    nginx.ingress.kubernetes.io/proxy-request-buffering:  "off"
+spec:
+  rules: 
+  - host: kam-dnes-na-obed.10.57.24.204.nip.io
+    http: 
+      paths: 
+      - path: /
+        backend: 
+          serviceName: kam-dnes-na-obed
+          servicePort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kam-dnes-na-obed
+  name: kam-dnes-na-obed
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: kam-dnes-na-obed
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kam-dnes-na-obed
+  name: kam-dnes-na-obed
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kam-dnes-na-obed
+  template:
+    metadata:
+      labels:
+        app: kam-dnes-na-obed
+    spec:
+      containers:
+      - image: docker.io/senglu/obed:1.0
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          capabilities:
+            drop:
+              - NET_RAW
+        name: kam-dnes-na-obed
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 200m
+            memory: 1Gi
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 5  
+

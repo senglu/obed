@@ -1,0 +1,375 @@
+/* mark2vote={ '5':-1.1, '4':0, '3':0.001, '2':0.999, '1':1, '0':0 }*/
+.sc0 {
+	color: black;
+  background-color: #FFFF00;
+}
+.sc1 {
+	color: black;
+	background-color: #006600;
+}
+.sc2 {
+    color: black;
+    background-color: #009900;
+}
+.sc3{
+    color: black;
+    background-color: #DAFF00;
+}
+.sc4 {
+    color: black;
+    background-color: #FFFF00;
+}
+/*.sc5 {
+    color: black;
+    background-color: #FFC2CD;
+}
+
+.vasek.sc5{*/
+.sc5 {
+    color: black;
+    background-color: #FF0000;
+}
+
+
+/*.sc1 {
+	color: black;
+	background-color: #009900;
+}
+.sc2 {
+    color: black;
+    background-color: #99CC00;
+}
+.sc3{
+    color: black;
+    background-color: #FFFF00;
+}
+.sc4 {
+    color: black;
+    background-color: #FF6600;
+}
+.sc5 {
+    color: black;
+    background-color: #FF3300;
+}*/
+
+
+
+.sc15 {
+	color: black;
+  background-color: #f9f9f9;
+}
+.sc14 {
+	color: black;
+	background-color: #006600;
+}
+.sc13 {
+    color: black;
+    background-color: #009900;
+}
+.sc12{
+    color: black;
+    background-color: #DAFF00;
+}
+.sc11 {
+    color: black;
+    background-color: #FFFF00;
+}
+.sc10 {
+    color: black;
+    background-color: #FF0000;
+}
+
+.scBIG {
+	height: 1.5em;
+		
+}
+
+.scSMALL {
+	height: 0.1em;
+}
+
+
+
+/* Custom indentations are needed because the length of custom labels differs from
+   the length of the standard labels */
+.custom-size-flipswitch.ui-flipswitch .ui-btn.ui-flipswitch-on {
+    text-indent: -3.9em;
+}
+.custom-size-flipswitch.ui-flipswitch .ui-flipswitch-off {
+    text-indent: 0.5em;
+}
+/* Custom widths are needed because the length of custom labels differs from
+   the length of the standard labels */
+.custom-size-flipswitch.ui-flipswitch {
+    width: 6.875em;
+}
+.custom-size-flipswitch.ui-flipswitch.ui-flipswitch-active {
+    padding-left: 5em;
+    width: 1.875em;
+}
+@media (min-width: 28em) {
+    /*Repeated from rule .ui-flipswitch above*/
+    .ui-field-contain > label + .custom-size-flipswitch.ui-flipswitch {
+        width: 1.875em;
+        background-color: #ff0000;
+    }
+}
+
+.ui-flipswitch {
+    margin: 0.2em;
+}
+
+/*#grid-name {
+    max-width: 800px;
+}*/
+
+@media all and (min-width: 500px) {
+    .a {
+       float: left;
+       width: 50%;
+    }
+
+    .b {
+        float: top;
+        width: 100%;
+        padding-bottom: 25px;
+    }
+
+    #grid-name>.ui-block-a {
+       float: left;
+       width: 50%;
+    }
+
+    #grid-name>.ui-block-b,
+    #grid-name>.ui-block-c{
+      float: left;
+      width: 24%;
+    }
+
+    .vote-slider {
+        min-width: 300px;
+        float: right;
+    }
+
+    #votesDiv .ui-grid-solo {
+        float: left;
+        width: 49.90%;
+        padding-bottom: 0.5em;
+        padding-top: 0.2em;
+    }
+
+    #ajax_results .ui-grid-solo {
+        float: left;
+        padding-bottom: 0.5em;
+        padding-top: 0.2em;
+    }
+
+    #after-header {
+        margin-top: 3em;
+    }
+
+    td.sc1, td.sc2, td.sc3, td.sc4, td.sc5, td.sc10, td.sc11, td.sc12, td.sc13, td.sc14, td.sc15 {
+        width: 4em;
+    }
+}
+
+@media all and (max-width: 499px) {
+    .a {
+       float: top;
+       width: 100%;
+    }
+
+    .b {
+        padding-top: 5px;
+        float: top;
+        width: 100%;
+        padding-bottom: 20px;
+    }
+
+    #grid-name>.ui-block-a {
+       float: left;
+       width: 50%;
+    }
+
+    #grid-name>.ui-block-b {
+      float: left;
+      width: 49.5%;
+    }
+
+    #grid-name>.ui-block-c {
+      float: left;
+      width: 80%;
+      margin-left: 0.7em;
+      margin-right: 1em;
+    }
+
+    .vote-slider {
+        min-width: 300px;
+        float: right;
+    }
+
+    .vote-slider {
+        min-width: 200px;
+        float: right;
+    }
+
+    #votesDiv .ui-grid-solo,
+    #ajax_results .ui-grid-solo {
+        float: none;
+        width: 99.90%;
+        padding-bottom: 0.5em;
+        padding-top: 0.2em;
+    }
+
+    #after-header {
+        margin-top: 6em;
+    }
+
+    td .sc1, td.sc2, td.sc3, td.sc4, td.sc5, td.sc10, td.sc11, td.sc12, td.sc13, td.sc14, td.sc15 {
+        width: 2em;
+    }
+}
+
+.hospoda-icon {
+    height: 2em;
+    width: 2em;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+
+}
+
+.edit-icon {
+    height: 1.5em;
+    width: 1.5em;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+
+}
+
+.hospoda-icon-mini {
+    height: 1em;
+    width: 1em;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+}
+
+
+  .ajax_chat {
+    height: 6em;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-color: #ddd;
+    resize: vertical;
+  }
+
+#header {
+    background-color: #e9e9e9;
+}
+
+.vote-slider input {
+    position: absolute;
+    top: -9999px;
+    right: 0;
+    width: 0px;
+    height: 0px;
+    margin: 0px;
+    padding: 0px;
+    /*display: none;*/
+}
+
+.vote-slider .ui-slider-track {
+    margin: 0 15px 0 15px;
+}
+
+#vote .ui-input-text {
+   position: relative;
+   top: 0.3em;
+   left: 1em;
+}
+
+#vote .ui-flipswitch {
+   position: relative;
+   top: 0.3em;
+   left: 0.2em;
+}
+
+#grid-name {
+    position: relative;
+    top: 0.2em;
+}
+
+#vote .ui-input-btn {
+    background-color: #38c;
+    border-color: #38c;
+    color: #fff;
+    text-shadow: 0 1px 0 #059;
+    top: -0.2em;
+}
+
+.vote-slider .ui-slider-track .ui-btn-active {
+    background-color: #FFFF00;
+}
+
+.vote-slider .ui-bar-inherit {
+    background-color: #FFFF00;
+}
+
+/* RED-GREEN */
+.vote-slider.v10 .ui-slider-track .ui-btn-active {
+    background-color: #006600;
+}
+
+.vote-slider.v10 .ui-bar-inherit {
+    /*background-color: #FFC2CD;*/
+    background-color: #FF0000;
+}
+
+.vote-slider.v14 .ui-slider-track .ui-btn-active {
+    background-color: #006600;
+}
+
+.vote-slider.v14 .ui-bar-inherit {
+    /*background-color: #FFC2CD;*/
+    background-color: #FF0000;
+}
+
+
+/* Yellow */
+.vote-slider.v11 .ui-slider-track .ui-btn-active {
+    background-color: #FFFF00;
+}
+
+.vote-slider.v11 .ui-bar-inherit {
+    background-color: #FFFF00;
+}
+
+/* GREENISH - Yellow */
+.vote-slider.v12 .ui-slider-track .ui-btn-active {
+    background-color: #DFFF00;
+}
+
+.vote-slider.v12 .ui-bar-inherit {
+    background-color: #DAFF00;
+}
+
+
+/* Greenish */
+.vote-slider.v13 .ui-slider-track .ui-btn-active {
+    background-color: #009900;
+}
+
+.vote-slider.v13 .ui-bar-inherit {
+    background-color: #009900;
+}
+
+
+/* REDISH 
+.vote-slider.v11 .ui-slider-track .ui-btn-active {
+    background-color: #FFFF00;
+}
+
+.vote-slider.v11 .ui-bar-inherit {
+    background-color: #FF6600;
+}*/
+
+

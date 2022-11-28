@@ -1,0 +1,105 @@
+<div class="a" th:fragment="food (hospody, vote, slider)">
+	<div th:each="hospoda : ${hospody}">
+		<div class="vote-slider neutral" th:if="${slider}">
+			<input form="vote" type="range" th:name="${hospoda}"
+				th:id="${hospoda}" min="10" max="14"
+				th:value="${vote == null ? 11: vote.get(hospoda) == null ? 11 : vote.get(hospoda)}"
+				class=".vote_slider" step="1" data-highlight="true">
+		</div>
+		<div class="b">
+			<p th:utext="${MENUS.get(hospoda)}" />
+		</div>
+	</div>
+</div>
+
+
+<div th:fragment="ajax_results" id="ajax_results">
+	<div th:replace="fragments::result ('G1 (' + ${NUM1} + ')' , ${RESULTS1})" />
+	<div class="ui-grid-solo" th:if="${RESULTS2.size() > 0}">&nbsp;</div>
+	<div th:replace="fragments::votes (${HOSPODY}, ${VOTES}, ${CLIENT_ID})" />
+	<div class="ui-grid-solo" th:if="${RESULTS2.size() > 0}">&nbsp;</div>
+	<div th:replace="fragments::result ('G2 (' + ${NUM2} + ')', ${RESULTS2})"/>
+</div>
+
+<div class="ui-grid-solo" th:fragment="result (grouplabel, results)"  th:if="${results.size() > 0}">
+	<div class="ui-block-a">
+		<h3><center><span th:text="${grouplabel}"/></center></h3>
+		<div th:each="result : ${results}">
+			<div th:if="${result.space}">&nbsp;</div>
+			<img th:src="'/images/' + ${result.icon}" class="hospoda-icon-mini" />
+			<b th:if="${result.bold}"><span
+				th:text="${result.pub}+' ('+${result.value}+')'" /></b> <span
+				th:unless="${result.bold}"
+				th:text="${result.pub}+' ('+${result.value}+')'" />
+		</div>
+	</div>
+</div>
+
+
+<div class="ui-grid-solo" th:fragment="votes (hospody, votes, clientid)">
+	<div class="ui-block-a" style="overflow: auto">
+		<table class="table-stroke">
+
+			<div th:each="voteKV : ${votes}">
+				<tr th:if="${voteKV.getValue().get(0).get('groupstart')}">
+					<td style="width: 6pt;"/>
+					<td style="min-width: 5em;"><b th:text="${voteKV.getValue().get(0).get('groupid').equals('0') ? 'User (G1)' : 'User (G2)'}"></b></td>
+					<td th:each="hospoda : ${hospody}"><center>
+							<img th:src="'/images/' + ${hospoda.icon}" class="hospoda-icon" />
+						</center></td>
+					<td style="width: 32pt;" />
+				</tr>
+				<tr th:each="vote,iter : ${voteKV.getValue()}">
+					<td th:rowspan="${voteKV.getValue().size() +1 }" th:if="${iter.index == 0}"/>
+					<td th:rowspan="${voteKV.getValue().size() +1 }" th:if="${iter.index == 0}" class="td-user" th:text="${vote.get('user')}" />
+					<td th:each="hospoda : ${hospody}"
+						th:class="'sc' + ${vote.get(hospoda.name()) + ' sc' + (iter.index == 0 ? 'BIG' : 'SMALL')}"> </td>
+					<td th:rowspan="${voteKV.getValue().size() +1 }" 
+						th:if="${iter.index == 0}" 
+						style="width: 48pt;"><span th:if="${(voteKV.getKey().equals(CLIENT_ID) or '0'.equals(clientid))}"><a
+						th:href="${'/edit?clientid='+voteKV.getKey()}"><img
+							src="/images/edit.png" class="edit-icon" /></a></span><span th:if="${(voteKV.getKey().equals(CLIENT_ID) or '0'.equals(clientid))}"
+							 th:data-clientid="${clientid}" th:data-groupid="${vote.get('groupid')}" onclick="chngGroup(this);" onmouseover=""
+					style="vertical-align: top; cursor: pointer;">G</span><span th:if="${'0'.equals(clientid) and iter.index == 0}"><a 
+						th:href="${'/delete?clientid='+voteKV.getKey()}"><img
+							src="/images/delete.png" class="edit-icon" /></a></span></td>					
+				</tr>
+				<tr style="height: 0.01em; margin: 0 0 0 0;" >
+					<td th:each="hospoda : ${hospody}"						
+						th:text="' '" />
+				</tr>
+			</div>
+		</table>
+	</div>
+</div>
+
+
+<form name="chat" data-ajax="false" th:fragment="ajax_chat">
+	<div class="ui-grid-solo">
+		<div class="ui-block-a">
+			<input type="text" autocomplete="off" name="msg" id="msg"
+				data-clear-btn="true" placeholder="Chat">
+		</div>
+	</div>
+	<div class="ui-grid-solo">
+		<div class="ui-block-a">
+			<div class="ui-body-a ui-corner-all ajax_chat">
+				<span id="ajax_chat" style="display: none">REFRESH_ME</span>
+			</div>
+		</div>
+		<input type="hidden" name="clientid" th:value="${CLIENT_ID}">
+		<div
+			style="position: absolute; left: -9999px; width: 1px; height: 1px;">
+			<input type="submit" value="SEND" onclick="return sendChat();"
+				tabindex="-1">
+		</div>
+	</div>
+</form>
+
+<div th:fragment="ajax_chat_text" id="ajax_chat_text">
+	<span id="ajax_chat" th:text="${AJAX_VERSION}" style="display: none" />
+
+	<div th:each="line : ${CHAT}">
+		[<b><span th:text="${line.user}" /></b> <small th:text="${line.time}" />] <span th:text="${line.msg}" />
+	</div>
+</div>

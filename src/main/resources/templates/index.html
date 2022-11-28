@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kam dnes na obed?</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" type="text/css"
+	href="/css/jquery.mobile-1.4.5.min.css" />
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<!-- <script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script> -->
+<script th:src="@{/webjars/jquery-mobile/jquery.mobile.min.js}"></script>
+<!-- <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script> -->
+
+<link rel="stylesheet" type="text/css" href="/css/lunch20192511.css" />
+
+</head>
+<body onpageshow="refreshAjax()">
+
+	<script type="text/javascript" src="/scripts/lunch20192911.js"></script>
+
+	<div data-role="page" id="page1">
+		<div role="main" class="ui-content">
+			<!-- HLASOVANI - hospody, +1/0/-1 -->
+			<form id="vote" name="vote" action="/results" method="post"
+				data-ajax="false" onsubmit="return sendVote();">
+				<div id="header" data-position="fixed" class="ui-header-fixed">
+					<div class="ui-grid-solo" id="grid-name">
+						<div class="ui-block-a ui-field-contain">
+							<label for="user" class="ui-hidden-accessible">Username:</label><input
+								type="text" name="user" id="user" placeholder="Jméno"
+								th:value="${USER}">
+						</div>
+						<div class="ui-block-b">
+							<input type="checkbox" data-role="flipswitch" name="ucast"
+								id="ucast" data-on-text="Jdu" data-off-text="Nejdu"
+								th:checked="${ VOTE == null ? 'checked' : VOTE.get('ucast') }"
+								data-wrapper-class="custom-size-flipswitch">
+						</div>
+						<div class="ui-block-c">
+							<input type="submit" value="Submit">
+						</div>
+					</div>
+				</div>
+				<input type="hidden" name="clientid" th:value="${CLIENT_ID}">
+				<input type="hidden" name="groupid" th:value="${GROUP_ID}">
+			</form>
+
+			<div id="after-header">
+				<div th:replace="fragments::ajax_chat" />
+
+				<div th:replace="fragments::food(${HOSPODYL}, ${VOTE}, true)" />
+
+				<div th:replace="fragments::food(${HOSPODYR}, ${VOTE}, true)" />
+
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
